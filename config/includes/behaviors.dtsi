@@ -1,0 +1,128 @@
+/* Home-Row Mods */
+ZMK_HOLD_TAP(hml,
+    flavor="balanced";
+    tapping-term-ms=<280>;
+    quick-tap-ms=<175>;
+    require-prior-idle-ms=<130>;
+    bindings=<&kp>,<&kp>;
+    hold-trigger-key-positions = <KEYS_R THUMBS_L THUMBS_R>;
+    hold-trigger-on-release;
+)
+
+ZMK_HOLD_TAP(hmr,
+    flavor="balanced";
+    tapping-term-ms=<280>;
+    quick-tap-ms=<175>;
+    require-prior-idle-ms=<130>;
+    bindings=<&kp>,<&kp>;
+    hold-trigger-key-positions = <KEYS_L THUMBS_L THUMBS_R>;
+    hold-trigger-on-release;
+)
+
+#define HML(mod_key, alpha_key) &hml mod_key alpha_key // HRM Left Hand
+#define HMR(mod_key, alpha_key) &hmr mod_key alpha_key // HRM Right Hand
+/* ------------- */
+
+/* One-Shot Mods */
+ZMK_STICKY_KEY(osm_sk,
+    release-after-ms=<3000>;
+    bindings=<&kp>;
+    quick-release;
+    lazy;
+    ignore-modifiers;
+)
+
+ZMK_HOLD_TAP(osm,
+    flavor="balanced";
+    tapping-term-ms=<280>;
+    bindings=<&kp>,<&osm_sk>;
+    hold-while-undecided-linger;
+)
+
+#define OSM(keycode) &osm keycode keycode
+/* ------------- */
+
+/*
+Window Swapper
+
+Call this macro before using the &win_swap behavior to specify 
+the position of the key that triggers the previous window.
+*/
+#define WIN_SWAP(...) \
+    ZMK_TRI_STATE(win_swap, \
+        bindings=<&kt LGUI>,<&kp TAB>,<&kt LGUI>; \
+        ignored-key-positions=<__VA_ARGS__>; \
+    )
+/* ------------- */
+
+/*
+Tab Swapper
+
+Call this macro before using the &tab_swap behavior to specify
+the position of the key that triggers the previous tab.
+*/
+#define TAB_SWAP(...) \
+    ZMK_TRI_STATE(tab_swap, \
+        bindings=<&kt LCTRL>,<&kp TAB>,<&kt LCTRL>; \
+        ignored-key-positions=<__VA_ARGS__>; \
+    )
+/* ------------- */
+
+/* Auto Shift */
+ZMK_HOLD_TAP(as,
+    flavor="tap-preferred";
+    tapping-term-ms=<180>;
+    bindings=<&kp>,<&kp>;
+)
+
+#define AS(keycode) &as LS(keycode) keycode
+/* ------------- */
+
+/* Jump Cusor */
+// To end of next word
+ZMK_MACRO(jump_nxt, bindings=<&macro_tap &kp LA(RIGHT)>;)
+// To end of current word
+ZMK_MACRO(jump_end, bindings=<&macro_tap &kp LA(LEFT) &kp LA(RIGHT)>;)
+// To beg of next word
+ZMK_MACRO(jump_prv, bindings=<&macro_tap &kp LA(LEFT)>;)
+// To beg of current word
+ZMK_MACRO(jump_bgn, bindings=<&macro_tap &kp LA(RIGHT) &kp LA(LEFT)>;)
+/* ----------- */
+
+/* Select Word */
+// Jumps to the beginning of the current word and selects to the right of the cursor.
+ZMK_MACRO(_sel_nxt, bindings=<&macro_tap &kp LS(LA(RIGHT))>;)
+ZMK_TRI_STATE(sel_nxt, bindings=<&jump_bgn>,<&_sel_nxt>,<&none>;)
+
+// Jump to the end of the current word and selects to the left of the cursor.
+ZMK_MACRO(_sel_prv, bindings=<&macro_tap &kp LS(LA(LEFT))>;)
+ZMK_TRI_STATE(sel_prv, bindings=<&jump_end>,<&_sel_prv>,<&none>;)
+/* ----------- */
+
+/* Haptic Feedback */
+// To work with ZMK Helpers library
+#define ZMK_BEHAVIOR_CORE_output_generic  compatible = "zmk,output-behavior-generic";  #binding-cells = <0>
+#define ZMK_BEHAVIOR_CORE_output_listener compatible = "zmk,output-behavior-listener"; #binding-cells = <0>
+
+ZMK_BEHAVIOR(haptic_sharp_click_3, output_generic, device=<&haptic>; force=<6>;)
+ZMK_BEHAVIOR(haptic_soft_bump_1,   output_generic, device=<&haptic>; force=<7>;)
+
+#define OUTPUT_SOURCE_LAYER_STATE_CHANGE 1
+#define HAPTIC_LAYER(...)                           \
+    ZMK_BEHAVIOR(                                   \
+        haptic_layer, output_listener,              \
+        bindings=<&haptic_soft_bump_1>;             \
+        layers=<__VA_ARGS__>;                       \
+        sources=<OUTPUT_SOURCE_LAYER_STATE_CHANGE>; \
+        all-state;                                  \
+    )
+
+#define OUTPUT_SOURCE_KEYCODE_STATE_CHANGE 2
+#define HAPTIC_KEYCODE(keycode)                       \
+    ZMK_BEHAVIOR(                                     \
+        haptic_keycode_##keycode, output_listener,    \
+        bindings=<&haptic_sharp_click_3>;             \
+        sources=<OUTPUT_SOURCE_KEYCODE_STATE_CHANGE>; \
+        position=<keycode>;                           \
+    )
+/* ----------- */
