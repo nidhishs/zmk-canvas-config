@@ -6,6 +6,8 @@ manifest:
       url-base: https://github.com/flumelabs
     - name: urob
       url-base: https://github.com/urob
+    - name: badjeff
+      url-base: https://github.com/badjeff
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -20,5 +22,11 @@ manifest:
     - name: zmk-tri-state
       remote: urob
       revision: v0.1
+    - name: zmk-output-behavior-listener
+      remote: badjeff
+      revision: d6f2f4c
+    - name: zmk-drv2605-driver
+      remote: badjeff
+      revision: 81a386a
   self:
     path: config

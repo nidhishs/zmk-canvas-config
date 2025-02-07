@@ -100,29 +100,42 @@ ZMK_TRI_STATE(sel_prv, bindings=<&jump_end>,<&_sel_prv>,<&none>;)
 /* ----------- */
 
 /* Haptic Feedback */
-// To work with ZMK Helpers library
-#define ZMK_BEHAVIOR_CORE_output_generic  compatible = "zmk,output-behavior-generic";  #binding-cells = <0>
-#define ZMK_BEHAVIOR_CORE_output_listener compatible = "zmk,output-behavior-listener"; #binding-cells = <0>
+/ {
+    haptic_sharp_click_3: haptic_sharp_click_3 {
+        compatible = "zmk,output-behavior-generic";
+        #binding-cells = <0>;
+        device = <&haptic>;
+        force = <6>;
+    };
 
-ZMK_BEHAVIOR(haptic_sharp_click_3, output_generic, device=<&haptic>; force=<6>;)
-ZMK_BEHAVIOR(haptic_soft_bump_1,   output_generic, device=<&haptic>; force=<7>;)
+    haptic_soft_bump_1: haptic_soft_bump_1 {
+        compatible = "zmk,output-behavior-generic";
+        #binding-cells = <0>;
+        device = <&haptic>;
+        force = <7>;
+    };
+};
 
 #define OUTPUT_SOURCE_LAYER_STATE_CHANGE 1
-#define HAPTIC_LAYER(...)                           \
-    ZMK_BEHAVIOR(                                   \
-        haptic_layer, output_listener,              \
-        bindings=<&haptic_soft_bump_1>;             \
-        layers=<__VA_ARGS__>;                       \
-        sources=<OUTPUT_SOURCE_LAYER_STATE_CHANGE>; \
-        all-state;                                  \
-    )
+#define HAPTIC_LAYER(layers_args)                         \                 
+    / {                                                   \
+        haptic_layer {                                    \
+            compatible = "zmk,output-behavior-listener";  \
+            bindings = <&haptic_soft_bump_1>;             \
+            layers = layers_args;                         \
+            sources = <OUTPUT_SOURCE_LAYER_STATE_CHANGE>; \
+            all-state;                                    \
+        };                                                \
+    };
 
 #define OUTPUT_SOURCE_KEYCODE_STATE_CHANGE 2
-#define HAPTIC_KEYCODE(keycode)                       \
-    ZMK_BEHAVIOR(                                     \
-        haptic_keycode_##keycode, output_listener,    \
-        bindings=<&haptic_sharp_click_3>;             \
-        sources=<OUTPUT_SOURCE_KEYCODE_STATE_CHANGE>; \
-        position=<keycode>;                           \
-    )
+#define HAPTIC_KEYCODE(keycode)                             \
+    / {                                                     \
+        haptic_keycode_##keycode {                          \
+            compatible = "zmk,output-behavior-listener";    \
+            bindings = <&haptic_sharp_click_3>;             \
+            position = <keycode>;                           \
+            sources = <OUTPUT_SOURCE_KEYCODE_STATE_CHANGE>; \
+        };                                                  \
+    };
 /* ----------- */
