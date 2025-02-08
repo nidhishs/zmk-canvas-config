@@ -25,6 +25,9 @@ manifest:
     - name: zmk-output-behavior-listener
       remote: badjeff
       revision: d6f2f4c
+    - name: zmk-split-peripheral-output-relay
+      remote: badjeff
+      revision: 014b549
     - name: zmk-drv2605-driver
       remote: badjeff
       revision: 81a386a
