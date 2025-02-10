@@ -8,6 +8,8 @@ manifest:
       url-base: https://github.com/urob
     - name: badjeff
       url-base: https://github.com/badjeff
+    - name: caksoylar
+      url-base: https://github.com/caksoylar
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -31,5 +33,8 @@ manifest:
     - name: zmk-drv2605-driver
       remote: badjeff
       revision: 81a386a
+    - name: zmk-rgbled-widget
+      remote: caksoylar
+      revision: f207117
   self:
     path: config
