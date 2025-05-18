@@ -99,6 +99,14 @@ ZMK_MACRO(_sel_prv, bindings=<&macro_tap &kp LS(LA(LEFT))>;)
 ZMK_TRI_STATE(sel_prv, bindings=<&jump_end>,<&_sel_prv>,<&none>;)
 /* ----------- */
 
+/* BT Device Chooser */
+ZMK_TAP_DANCE(
+    bt_sel,
+    tapping-term-ms=<200>;
+    bindings=<&bt BT_SEL 0>,<&bt BT_SEL 1>,<&bt BT_SEL 2>;
+)
+/* ----------- */
+
 /* Haptic Feedback */
 #define HAPTIC_OBG(node_name, device_ref, force_val) \
     node_name: node_name {                           \

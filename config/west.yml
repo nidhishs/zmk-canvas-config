@@ -8,6 +8,8 @@ manifest:
       url-base: https://github.com/urob
     - name: badjeff
       url-base: https://github.com/badjeff
+    - name: caksoylar
+      url-base: https://github.com/caksoylar
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -22,6 +24,9 @@ manifest:
     - name: zmk-tri-state
       remote: urob
       revision: v0.1
+    - name: zmk-rgbled-widget
+      remote: caksoylar
+      revision: main
     - name: zmk-output-behavior-listener
       remote: badjeff
       revision: d6f2f4c
