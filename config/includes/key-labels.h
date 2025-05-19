@@ -33,9 +33,9 @@
 #define RM3 18
 #define RM4 19
  
-#define LB1 20  // left-bottom row
+#define LB1 22  // left-bottom row
 #define LB2 21
-#define LB3 22
+#define LB3 20
  
 #define RB1 23  // right-bottom row
 #define RB2 24
