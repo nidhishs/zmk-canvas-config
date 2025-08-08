@@ -17,8 +17,8 @@
 #define COMBO_IDLE_SLOW 250 // For combos that are trigger layer changes or mods.
 
 /* Alphabet combos */
-ZMK_COMBO(q, &kp Q, LT2 LT1, ALP, COMBO_TERM_FAST, COMBO_IDLE_DEF)
-ZMK_COMBO(x, &kp X, LT3 LT2, ALP, COMBO_TERM_FAST, COMBO_IDLE_DEF)
+ZMK_COMBO(b, &kp B, LM4 LB3, ALP, COMBO_TERM_FAST, COMBO_IDLE_DEF)
+ZMK_COMBO(v, &kp V, LM0 LB1, ALP, COMBO_TERM_FAST, COMBO_IDLE_DEF)
 ZMK_COMBO(k, &kp K, RB1 RB2, ALP, COMBO_TERM_DEF,  COMBO_IDLE_DEF)
 
 /* Vertical combos */

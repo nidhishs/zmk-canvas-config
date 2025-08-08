@@ -40,7 +40,7 @@ TAB_SWAP(LT2)
     HAPTIC_OBG(hr_strong_click_1, &haptic_r, 1)
 
     HAPTIC_KEYCODE(haptic_key_b, <0x05>, <&hl_dc_strong_1>, <ALP>)
-    HAPTIC_KEYCODE(haptic_key_j, <0x0D>, <&hr_dc_strong_1>, <ALP>)
+    HAPTIC_KEYCODE(haptic_key_j, <0x0D>, <&hr_dc_strong_1>, <ALP>)gyg
     HAPTIC_KEYCODE(haptic_lshift, <0xE1>, <&hl_dc_strong_1>, <ALP>)
     HAPTIC_KEYCODE(haptic_rshift, <0xE5>, <&hr_dc_strong_1>, <ALP>)
     HAPTIC_LAYER(haptic_sym, <&hl_strong_click_1>, <SYM>)
@@ -49,11 +49,11 @@ TAB_SWAP(LT2)
 
 ZMK_LAYER(alph,
 //  ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮  ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-      &kp B         &kp L         &kp D         &kp C         &kp V            &kp SQT       &kp F         &kp O         &kp U         &kp J     
+      &kp X         &kp Q         &kp M         &kp W         &kp Z            &kp SQT       &kp F         &kp O         &kp U         &kp J     
 //  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
       &kp N         &kp R         &kp T         HML(LSHFT,S)  &kp G            &kp Y         HMR(RSHFT,H)  &kp A         &kp E         &kp I
 //  ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────╯  ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────╯
-                    &kp Z         &kp M         &kp W                                        &kp P         &kp COMMA     &kp DOT      
+                    &kp L         &kp D         &kp C                                        &kp P         &kp COMMA     &kp DOT      
 //                ╰─────────────┴─────────────┼─────────────┼─           ─╮  ╭─           ─┼─────────────┼─────────────┴─────────────╯
                                                              &lt SYM SPACE    &lt NAV SPACE 
 //                                                          ╰─────────────╯  ╰─────────────╯
